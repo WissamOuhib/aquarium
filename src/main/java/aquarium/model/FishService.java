@@ -17,27 +17,32 @@ public class FishService { //les services
     }
 
     public Fish addFishWithRandomPosition() {
-        double randomX = generateRandomX();
-        double randomY = generateRandomY();
+        //System.out.println("!!!!!!!!!!!!!!!!!   "+ Config.getInstance().getGrid().length);
+        Coordinate position = Coordinate.generateRandomCoordinates(aquariumPane);
+        double randomX = position.getX();
+        double randomY = position.getY();
 
-        ImageView fishImageView = FishFactory.createFishImageView(Config.getFish_Width(), Config.getFish_height());
-        Fish newFish = new Fish(randomX, randomY, fishImageView);
-        newFish.initializeFish();
-
-        return newFish;
+        if(randomX!=0 && randomY!=0) {
+            ImageView fishImageView = FishFactory.createFishImageView(Config.getFish_Width(), Config.getFish_height());
+            Fish newFish = new Fish(randomX, randomY, fishImageView);
+            newFish.initializeFish();
+            return newFish;
+        }
+        return null;
     }
 
-    private double generateRandomX() {
-        double x =  Math.random() * (aquariumPane.getWidth() - Config.getFish_Width());
-        System.out.println("11111111111111111111111 "+aquariumPane.getWidth()+"   "+x);
 
-        return x;
-    }
-
-    private double generateRandomY() {
-        double y = Math.random() * (aquariumPane.getHeight() - Config.getFish_height());
-        System.out.println("22222222222222222222222 "+aquariumPane.getHeight()+"   "+y);
-
-        return y;
-    }
+//    private Coordinate spawn() {
+//        double x, y;
+//        do {
+//            x = generateRandomX();
+//            y = generateRandomY();
+//        } while (Coordinate.hasOverlap(x, y));
+//
+//        Config.addOccupiedCoordinate(x, y);
+//
+//        return new Coordinate(x,y);
+//
+//        // Set the fish's position and other properties
+//    }
 }

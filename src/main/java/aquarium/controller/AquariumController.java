@@ -31,6 +31,8 @@ public class AquariumController {
         AquariumPaneObservers = new ArrayList<>();
         addObserver(Config.getInstance()); //la config observe les changement des dimensions du pane
         notifyObservers(); //config recupère les dimensions du pane
+     //   Config.initGrid();
+        System.out.println("##############################");
 
         //changement des dimensions
         aquariumPane.widthProperty().addListener((observable, oldValue, newValue) -> {
@@ -45,7 +47,7 @@ public class AquariumController {
       //  System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxx "+aquariumPane.getWidth());
       //  System.out.println("yyyyyyyyyyyyyyyyyyyyyyyyyyyyy "+fishService.getAquariumPane().getWidth());
         Fish newFish = fishService.addFishWithRandomPosition();
-        aquariumPane.getChildren().add(newFish.getImageView());
+        if(newFish!=null) aquariumPane.getChildren().add(newFish.getImageView());
     }
 
     public static void addObserver(AquariumPaneObserver observer) {
@@ -58,7 +60,6 @@ public class AquariumController {
 
     private void notifyObservers() {
         for (AquariumPaneObserver observer : AquariumPaneObservers) {
-            System.out.println("xxxxxxxxxxxxxxxxxx "+observer);
             observer.onConfigChanged(aquariumPane.getWidth(), aquariumPane.getHeight());
         }
     }
