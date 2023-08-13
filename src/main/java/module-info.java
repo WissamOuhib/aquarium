@@ -3,6 +3,6 @@ module com.aquarium.aquarium {
     requires javafx.fxml;
 
 
-    opens com.aquariumapp to javafx.fxml;
-    exports com.aquariumapp;
+    opens aquarium to javafx.fxml;
+    exports aquarium;
 }

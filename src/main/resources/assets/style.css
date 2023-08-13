@@ -1,0 +1,47 @@
+/*************** Fenêtre ******************/
+
+
+/************ Conteneur Aquarium **************/
+.aquarium {
+     /*fond*/
+    -fx-background-image: url("bg.jpg");
+    -fx-background-size: cover;
+    /*border*/
+    -fx-border-radius: 30px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 15, 0, 0, 0);
+}
+
+/****************** Footer Fenêtre *************************/
+
+.footer {
+    -fx-padding: 30px;
+    -fx-background-color: #491c75;
+}
+
+/****************** boutons *************************/
+
+.btn {
+    -fx-min-width: 80px;
+    -fx-min-height: 50px;
+    -fx-padding: 10px;
+
+    -fx-background-color: #2ce4f5;
+    -fx-border-radius: 80px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.7), 15, 0, 0, 0);
+
+    -fx-cursor: hand;
+    -fx-font-size: 25px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Comic Sans MS", "Comic Sans", cursive;
+    -fx-text-fill: #00163b;
+}
+
+.btn:hover {
+    -fx-background-color: orange;
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+
+  /*  transition: -fx-background-color 1s ease,
+                    -fx-scale-x 1s ease,
+                    -fx-scale-y 1s ease;*/
+}
