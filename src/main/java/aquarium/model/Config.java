@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 
-public class Config implements AquariumPaneObserver { //la config est singleton et observe les changements de l'aquarium
+public class Config implements AquariumPaneObserver { //la config est singleton et observe les changements de la fenetre de l'aquarium
     @Getter
     private static final int gridCellSize = 10;
     @Getter

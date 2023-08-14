@@ -51,11 +51,21 @@ public class Fish {
         }
 
         // Check for collisions with aquarium borders
-        if (newX < 0 || newX > Config.getAquarium_Width()) {
+        double fish_x_edge;
+        double fish_y_edge;
+
+        if(speedX > 0) fish_x_edge = newX + Config.getFish_Width();
+        else fish_x_edge = newX;
+
+        if (newX < 0 || fish_x_edge > Config.getAquarium_Width()) {
             speedX *= -1; // Change horizontal direction
             changeXDirection = true;
         }
-        if (newY < 0 || newY > Config.getAquarium_height()) {
+
+        if(speedY > 0) fish_y_edge = newY + Config.getFish_height();
+        else fish_y_edge = newY;
+
+        if (newY < 0 || fish_y_edge > Config.getAquarium_height()) {
             speedY *= -1; // Change vertical direction
         }
 
