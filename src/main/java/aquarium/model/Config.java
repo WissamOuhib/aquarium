@@ -9,9 +9,15 @@ import java.util.Set;
 
 public class Config implements AquariumPaneObserver { //la config est singleton et observe les changements de l'aquarium
     @Getter
+    private static final int gridCellSize = 10;
+    @Getter
     private static final int Fish_Width = 100;
     @Getter
     private static final int Fish_height = 100;
+    @Getter
+    private static final double Fish_x_speed = Math.random() * 4 - 2; // Random value between -1 and 1
+    @Getter
+    private static final double Fish_y_speed = Math.random() * 4 - 2;
    // @Getter
    // private static int gridCellSize = 100;
     @Getter @Setter
@@ -26,10 +32,10 @@ public class Config implements AquariumPaneObserver { //la config est singleton 
     private static int maxFishCount = 20; // nombre max de poissons
     @Getter @Setter
     private static int spawnedFishCount = 0;
-    //@Getter @Setter
-    //private static boolean[][] grid;
     @Getter @Setter
     private static Set<Coordinate> occupiedCoordinates = new HashSet<>();
+
+
     private static Config Config_instance;
     private Config() {}
     public static Config getInstance() {
@@ -45,9 +51,6 @@ public class Config implements AquariumPaneObserver { //la config est singleton 
         setAquarium_height(height);
     }
 
-//    public static void initGrid() {
-//       grid = new boolean[(int)aquarium_Width / gridCellSize][(int)aquarium_height / gridCellSize];
-//    }
     @Override
     public void onConfigChanged(double width, double height) {
         updateAquariumDimensions(width, height);
@@ -58,10 +61,18 @@ public class Config implements AquariumPaneObserver { //la config est singleton 
     }
 
     public static void addOccupiedCoordinate(double x, double y) {
-        occupiedCoordinates.add(new Coordinate(x, y));
+        int gridX = (int) (x / gridCellSize);
+        int gridY = (int) (y / gridCellSize);
+
+        // Mark the occupied space for the fish's dimensions
+        for (int i = gridX; i < gridX + Fish_Width / gridCellSize; i++) {
+            for (int j = gridY; j < gridY + Fish_height / gridCellSize; j++) {
+                occupiedCoordinates.add(new Coordinate(i * gridCellSize, j * gridCellSize));
+            }
+        }
     }
 
-    public static boolean canSpawnMoreFish() {
+        public static boolean canSpawnMoreFish() {
         return spawnedFishCount < maxFishCount;
     }
 
@@ -69,21 +80,4 @@ public class Config implements AquariumPaneObserver { //la config est singleton 
         spawnedFishCount++;
     }
 
-//    public static void markOccupied(int x, int y) {
-//        int gridX = x / gridCellSize;
-//        int gridY = y / gridCellSize;
-//        grid[gridX][gridY] = true;
-//    }
-//
-//    public static void markVacant(int x, int y) {
-//        int gridX = x / gridCellSize;
-//        int gridY = y / gridCellSize;
-//        grid[gridX][gridY] = false;
-//    }
-//
-//    public static boolean isOccupied(int x, int y) {
-//        int gridX = x / gridCellSize;
-//        int gridY = y / gridCellSize;
-//        return grid[gridX][gridY];
-//    }
 }

@@ -1,19 +1,23 @@
 package aquarium.model;
 
+import javafx.animation.AnimationTimer;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import lombok.Getter;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class FishService { //les services
+    @Getter
     private Pane aquariumPane; // le conteneur de l'aquarium
-
-    public Pane getAquariumPane() {
-        return aquariumPane;
-    }
-
+    @Getter
+    private static List<Fish> fishList = new ArrayList<>();
     public FishService(Pane aquariumPane) {
         this.aquariumPane = aquariumPane;
-      //  System.out.println("222222222222222222222222222 "+aquariumPane);
     }
 
     public Fish addFishWithRandomPosition() {
@@ -23,26 +27,17 @@ public class FishService { //les services
         double randomY = position.getY();
 
         if(randomX!=0 && randomY!=0) {
-            ImageView fishImageView = FishFactory.createFishImageView(Config.getFish_Width(), Config.getFish_height());
-            Fish newFish = new Fish(randomX, randomY, fishImageView);
+          //  ImageView fishImageView = FishFactory.createFishImageView();
+            Fish newFish = FishFactory.createFish(randomX, randomY);
             newFish.initializeFish();
+            Config.addOccupiedCoordinate(randomX, randomY);
+            Config.incrementSpawnedFishCount();
+            fishList.add(newFish);
+            newFish.move();
             return newFish;
         }
         return null;
     }
 
 
-//    private Coordinate spawn() {
-//        double x, y;
-//        do {
-//            x = generateRandomX();
-//            y = generateRandomY();
-//        } while (Coordinate.hasOverlap(x, y));
-//
-//        Config.addOccupiedCoordinate(x, y);
-//
-//        return new Coordinate(x,y);
-//
-//        // Set the fish's position and other properties
-//    }
 }

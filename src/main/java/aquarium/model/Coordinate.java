@@ -32,18 +32,6 @@ public class Coordinate {
         return Double.compare(coordinate.x, x) == 0 && Double.compare(coordinate.y, y) == 0;
     }
 
-//    public static Coordinate generateRandomCoordinates(Pane aquariumPane) {
-//        int x, y;
-//        do {
-//            x = (int) generateRandomX(aquariumPane);
-//            y = (int) generateRandomY(aquariumPane);
-//        } while (Config.isOccupied(x, y));
-//
-//        Config.markOccupied(x, y); // Mark the occupied space
-//
-//        return new Coordinate(x,y);
-//    }
-
     public static Coordinate generateRandomCoordinates(Pane aquariumPane) {
         if (!Config.canSpawnMoreFish()) {
             // No more space for additional fish
@@ -55,9 +43,6 @@ public class Coordinate {
             x = (int) generateRandomX(aquariumPane);
             y = (int) generateRandomY(aquariumPane);
         } while (hasOverlap(x, y));
-
-        Config.addOccupiedCoordinate(x, y);
-        Config.incrementSpawnedFishCount();
 
         return new Coordinate(x,y);
 
@@ -95,10 +80,5 @@ public class Coordinate {
 
         return false; // No overlapping
     }
-
-
-
-
-
 
 }

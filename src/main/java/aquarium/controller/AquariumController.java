@@ -4,7 +4,9 @@ import aquarium.model.Config;
 import aquarium.model.AquariumPaneObserver;
 import aquarium.model.Fish;
 import aquarium.model.FishService;
+import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
@@ -25,14 +27,13 @@ public class AquariumController {
 
     //observateurs du changement des dimensions du aquariumPane
     private static List<AquariumPaneObserver> AquariumPaneObservers;
+    private AnimationTimer animationTimer;
 
     public void init() {
         fishService = new FishService(aquariumPane);
         AquariumPaneObservers = new ArrayList<>();
         addObserver(Config.getInstance()); //la config observe les changement des dimensions du pane
         notifyObservers(); //config recupère les dimensions du pane
-     //   Config.initGrid();
-        System.out.println("##############################");
 
         //changement des dimensions
         aquariumPane.widthProperty().addListener((observable, oldValue, newValue) -> {
@@ -41,13 +42,36 @@ public class AquariumController {
         aquariumPane.heightProperty().addListener((observable, oldValue, newValue) -> {
             Config.getInstance().updateAquariumDimensions(aquariumPane.getWidth(), newValue.doubleValue());
         });
+
+        animationTimer = new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+                updateFishPositions(); // Update fish nodes on the pane
+            }
+        };
+
+        startAnimation();
+    }
+
+    private void updateFishPositions() {
+        aquariumPane.getChildren().clear(); // Clear the pane
+        for (Fish fish : fishService.getFishList()) {
+            fish.move();
+         //   System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!  "+fish.getX());
+            Node fishNode = fish.getImageView();
+            fishNode.setLayoutX(fish.getX());
+            fishNode.setLayoutY(fish.getY());
+            aquariumPane.getChildren().add(fishNode);
+        }
     }
     public void handleAddFish(){
 
       //  System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxx "+aquariumPane.getWidth());
       //  System.out.println("yyyyyyyyyyyyyyyyyyyyyyyyyyyyy "+fishService.getAquariumPane().getWidth());
         Fish newFish = fishService.addFishWithRandomPosition();
-        if(newFish!=null) aquariumPane.getChildren().add(newFish.getImageView());
+        if(newFish!=null) {
+            aquariumPane.getChildren().add(newFish.getImageView());
+        }
     }
 
     public static void addObserver(AquariumPaneObserver observer) {
@@ -62,5 +86,9 @@ public class AquariumController {
         for (AquariumPaneObserver observer : AquariumPaneObservers) {
             observer.onConfigChanged(aquariumPane.getWidth(), aquariumPane.getHeight());
         }
+    }
+
+    private void startAnimation() {
+        animationTimer.start();
     }
 }
