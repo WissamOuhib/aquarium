@@ -5,6 +5,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.text.Font?>
 
 <!--<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"-->
@@ -26,6 +27,7 @@
         <Pane fx:id="aquariumPane" styleClass="aquarium">
             <!-- Aquarium content (fish, etc.) goes here -->
         </Pane>
+        <Label fx:id="maxFishMessage" styleClass="message" text="Oops plus de place !" visible="false" />
     </StackPane>
 </center>
 

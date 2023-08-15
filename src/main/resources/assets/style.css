@@ -45,3 +45,12 @@
                     -fx-scale-x 1s ease,
                     -fx-scale-y 1s ease;*/
 }
+
+/****************** message plus de place *************************/
+
+.message {
+    -fx-font-size: 50px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Comic Sans MS", "Comic Sans", cursive;
+    -fx-text-fill: #491c75;
+}

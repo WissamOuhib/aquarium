@@ -7,10 +7,13 @@ import aquarium.model.FishService;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
-
 import java.util.ArrayList;
 import java.util.List;
+import javafx.animation.FadeTransition;
+import javafx.util.Duration;
+
 
 public class AquariumController {
 //    @FXML
@@ -23,6 +26,8 @@ public class AquariumController {
 
     @FXML
     private Pane aquariumPane;
+    @FXML
+    private Label maxFishMessage;
     private FishService fishService;
 
     //observateurs du changement des dimensions du aquariumPane
@@ -67,9 +72,13 @@ public class AquariumController {
 
     @FXML
     private void handleAddFish(){
-        Fish newFish = fishService.addFishWithRandomPosition();
-        if(newFish!=null) {
-            aquariumPane.getChildren().add(newFish.getImageView());
+        if (FishService.getFishList().size() < Config.getMaxFishCount()) {
+            Fish newFish = fishService.addFishWithRandomPosition();
+            if (newFish != null) {
+                aquariumPane.getChildren().add(newFish.getImageView());
+            }
+        } else {
+            displayMessageAnimation(); // message plus de place
         }
     }
     @FXML
@@ -98,5 +107,20 @@ public class AquariumController {
 
     private void startAnimation() {
         animationTimer.start();
+    }
+
+    private void displayMessageAnimation() {
+        maxFishMessage.setVisible(true); // Show the message
+
+        // animation message
+        FadeTransition fadeOut = new FadeTransition(Duration.seconds(4), maxFishMessage);
+        fadeOut.setFromValue(1.0);
+        fadeOut.setToValue(0.0);
+
+        // hide the message when the animation ends
+        fadeOut.setOnFinished(event -> maxFishMessage.setVisible(false));
+
+        // Play the animation
+        fadeOut.play();
     }
 }
