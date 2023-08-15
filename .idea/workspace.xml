@@ -7,8 +7,7 @@
     <list default="true" id="d084065f-6737-4219-8686-66ddc75290fd" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/aquarium/controller/AquariumController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aquarium/controller/AquariumController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/aquarium/view/aquarium-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/aquarium/view/aquarium-view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/assets/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/assets/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/aquarium/model/FishService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aquarium/model/FishService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

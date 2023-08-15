@@ -16,8 +16,16 @@ public class FishService { //les services
     private Pane aquariumPane; // le conteneur de l'aquarium
     @Getter
     private static List<Fish> fishList = new ArrayList<>();
-    public FishService(Pane aquariumPane) {
+    private static FishService FishService_instance;
+
+    private FishService(Pane aquariumPane) {
         this.aquariumPane = aquariumPane;
+    }
+    public static FishService getInstance(Pane aquariumPane) {
+        if(FishService_instance == null) {
+            FishService_instance = new FishService(aquariumPane);
+        }
+        return FishService_instance;
     }
 
     public Fish addFishWithRandomPosition() {

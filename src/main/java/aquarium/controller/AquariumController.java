@@ -35,7 +35,7 @@ public class AquariumController {
     private AnimationTimer animationTimer;
 
     public void init() {
-        fishService = new FishService(aquariumPane);
+        fishService = FishService.getInstance(aquariumPane);
         AquariumPaneObservers = new ArrayList<>();
         addObserver(Config.getInstance()); //la config observe les changement des dimensions du pane
         notifyObservers(); //config recupère les dimensions du pane
