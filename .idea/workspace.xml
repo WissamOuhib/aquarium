@@ -5,12 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d084065f-6737-4219-8686-66ddc75290fd" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/fish-tank-ambiance.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/aquarium/sound/FishPopInSoundStrategy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/aquarium/sound/FishPopOutSoundStrategy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/aquarium/sound/MaxFishReachedSoundStrategy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/aquarium/sound/SoundManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/aquarium/sound/SoundStrategy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/fish_in.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/fish_out.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/assets/negative_beeps.mp3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/aquarium/AquariumApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aquarium/AquariumApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/aquarium/controller/AquariumController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aquarium/controller/AquariumController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/aquarium/model/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aquarium/model/Config.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -51,7 +56,7 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.33250207",
-    "settings.editor.selected.configurable": "configurable.group.build"
+    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -62,6 +67,7 @@
       <recent name="C:\intellij_workspace\aquarium\src\main\resources\aquarium\view" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="aquarium.sound" />
       <recent name="aquarium.controller" />
     </key>
   </component>

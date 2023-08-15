@@ -1,6 +1,5 @@
 package aquarium;
 
-import aquarium.controller.AquariumController;
 import aquarium.model.Config;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -20,7 +19,7 @@ public class AquariumApplication extends Application {
         stage.setScene(scene);
         stage.show();
 
-        AquariumController controller = fxmlLoader.getController();
+        //AquariumController controller = fxmlLoader.getController();
        // controller.init();
     }
 

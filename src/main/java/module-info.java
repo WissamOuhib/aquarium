@@ -4,7 +4,6 @@ module aquarium {
     requires lombok;
     requires javafx.media;
 
-
     opens aquarium to javafx.fxml;
     exports aquarium;
     exports aquarium.controller;

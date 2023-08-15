@@ -1,41 +1,29 @@
 package aquarium.controller;
 
-import aquarium.model.Config;
-import aquarium.model.AquariumPaneObserver;
-import aquarium.model.Fish;
-import aquarium.model.FishService;
+import aquarium.model.*;
+import aquarium.sound.SoundManager;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
-
-import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.animation.FadeTransition;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
 public class AquariumController implements Initializable {
-//    @FXML
-//    private Label welcomeText;
-//
-//    @FXML
-//    protected void onHelloButtonClick() {
-//        welcomeText.setText("Welcome to JavaFX Application!");
-//    }
 
     @FXML
     private Pane aquariumPane;
     @FXML
     private Label maxFishMessage;
     private FishService fishService;
+    private SoundManager soundManager;
 
     //observateurs du changement des dimensions du aquariumPane
     private static List<AquariumPaneObserver> AquariumPaneObservers;
@@ -44,6 +32,8 @@ public class AquariumController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         fishService = FishService.getInstance(aquariumPane);
+        soundManager = SoundManager.get_instance();
+
         AquariumPaneObservers = new ArrayList<>();
         addObserver(Config.getInstance()); //la config observe les changement des dimensions du pane
         notifyObservers(); //config recupère les dimensions du pane
@@ -64,10 +54,7 @@ public class AquariumController implements Initializable {
         };
 
         startAnimation();
-        playAmbientSound();
-    }
-    public void init() {
-
+        soundManager.playAmbientSound();
     }
 
     private void updateFishPositions() {
@@ -88,6 +75,7 @@ public class AquariumController implements Initializable {
             Fish newFish = fishService.addFishWithRandomPosition();
             if (newFish != null) {
                 aquariumPane.getChildren().add(newFish.getImageView());
+                soundManager.playFishPopInSound();
             }
         } else {
             displayMessageAnimation(); // message plus de place
@@ -100,6 +88,7 @@ public class AquariumController implements Initializable {
             Fish fishToRemove = fishList.get(fishList.size() - 1); // Remove the last added fish
             aquariumPane.getChildren().remove(fishToRemove.getImageView());
             fishService.removeFish(fishToRemove);
+            soundManager.playFishPopOutSound();
         }
     }
 
@@ -124,6 +113,9 @@ public class AquariumController implements Initializable {
     private void displayMessageAnimation() {
         maxFishMessage.setVisible(true); // Show the message
 
+        //sound
+        soundManager.playMaxFishReachedSound();
+
         // animation message
         FadeTransition fadeOut = new FadeTransition(Duration.seconds(4), maxFishMessage);
         fadeOut.setFromValue(1.0);
@@ -136,18 +128,5 @@ public class AquariumController implements Initializable {
         fadeOut.play();
     }
 
-    private void playAmbientSound() {
-        // Create a Media object with the path to your audio file
-        String audioPath = AquariumController.class.getResource("/assets/fish-tank-ambiance.mp3").toExternalForm();
-        Media media = new Media(audioPath);
-
-        // Create a MediaPlayer
-        MediaPlayer mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.setVolume(1); // Adjust the volume if needed
-        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE); // Play the music indefinitely
-
-        // Play the music
-        mediaPlayer.play();
-    }
 
 }
