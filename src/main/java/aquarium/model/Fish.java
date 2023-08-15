@@ -31,8 +31,8 @@ public class Fish {
         imageView.setLayoutX(x);
         imageView.setLayoutY(y);
         imageView.setVisible(true);
-        speedX = Config.getFish_x_speed();
-        speedY = Config.getFish_y_speed();
+        speedX = Math.random() * 4 - 2; // Random value between -2 and 2
+        speedY = Math.random() * 4 - 2;
     }
 
 
@@ -41,6 +41,9 @@ public class Fish {
         double newX = x + speedX;
         double newY = y + speedY;
         boolean changeXDirection = (speedX >0); //s'il va à droite au départ, j'inverse l'image
+
+        // Update coordinates
+        Coordinate.updateOccupiedSpace(x,y, newX, newY);
 
         // Check for collisions with other fish
         if (collidesWithOtherFish(newX, newY)) {
@@ -51,7 +54,7 @@ public class Fish {
         }
 
         // Check for collisions with aquarium borders
-        double fish_x_edge;
+        double fish_x_edge; //la limite physique du poisson
         double fish_y_edge;
 
         if(speedX > 0) fish_x_edge = newX + Config.getFish_Width();
@@ -85,11 +88,11 @@ public class Fish {
     }
 
     private boolean collidesWithOtherFish(double newX, double newY) {
-        Set<Coordinate> myOccupiedCoordinates = calculateOccupiedSpace();
+        Set<Coordinate> myOccupiedCoordinates = Coordinate.calculateOccupiedSpace(this.x, this.y);
 
         for (Fish otherFish : FishService.getFishList()) {
             if (otherFish != this) { // Skip checking against itself
-                Set<Coordinate> otherFishOccupiedCoordinates = otherFish.calculateOccupiedSpace();
+                Set<Coordinate> otherFishOccupiedCoordinates = Coordinate.calculateOccupiedSpace(otherFish.x, otherFish.y);
 
                 // Check for overlap between occupied spaces
                 if (checkOverlap(myOccupiedCoordinates, otherFishOccupiedCoordinates)) {
@@ -100,19 +103,6 @@ public class Fish {
         return false; // No collision detected with other fish
     }
 
-    public Set<Coordinate> calculateOccupiedSpace() {
-        Set<Coordinate> occupiedCoordinates = new HashSet<>();
-        int gridX = (int) (x / Config.getGridCellSize());
-        int gridY = (int) (y / Config.getGridCellSize());
-
-        for (int i = gridX; i < gridX + Config.getFish_Width() / Config.getGridCellSize(); i++) {
-            for (int j = gridY; j < gridY + Config.getFish_height() / Config.getGridCellSize(); j++) {
-                occupiedCoordinates.add(new Coordinate(i * Config.getGridCellSize(), j * Config.getGridCellSize()));
-            }
-        }
-
-        return occupiedCoordinates;
-    }
 
     private boolean checkOverlap(Set<Coordinate> coordinates1, Set<Coordinate> coordinates2) {
         for (Coordinate coord1 : coordinates1) {
@@ -122,6 +112,7 @@ public class Fish {
         }
         return false; // No overlapping detected
     }
+
 
 //    private boolean collidesWithOtherFish(double newX, double newY) {
 //        // Check if the new position collides with any other fish's position

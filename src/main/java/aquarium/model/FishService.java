@@ -21,7 +21,6 @@ public class FishService { //les services
     }
 
     public Fish addFishWithRandomPosition() {
-        //System.out.println("!!!!!!!!!!!!!!!!!   "+ Config.getInstance().getGrid().length);
         Coordinate position = Coordinate.generateRandomCoordinates(aquariumPane);
         double randomX = position.getX();
         double randomY = position.getY();

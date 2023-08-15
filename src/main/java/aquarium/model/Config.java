@@ -9,15 +9,11 @@ import java.util.Set;
 
 public class Config implements AquariumPaneObserver { //la config est singleton et observe les changements de la fenetre de l'aquarium
     @Getter
-    private static final int gridCellSize = 10;
+    private static final int gridCellSize = 10; //définit le seuil de proximité pour la detection de collision
     @Getter
     private static final int Fish_Width = 100;
     @Getter
     private static final int Fish_height = 100;
-    @Getter
-    private static final double Fish_x_speed = Math.random() * 4 - 2; // Random value between -1 and 1
-    @Getter
-    private static final double Fish_y_speed = Math.random() * 4 - 2;
    // @Getter
    // private static int gridCellSize = 100;
     @Getter @Setter
@@ -68,6 +64,18 @@ public class Config implements AquariumPaneObserver { //la config est singleton 
         for (int i = gridX; i < gridX + Fish_Width / gridCellSize; i++) {
             for (int j = gridY; j < gridY + Fish_height / gridCellSize; j++) {
                 occupiedCoordinates.add(new Coordinate(i * gridCellSize, j * gridCellSize));
+            }
+        }
+    }
+
+    public static void freeOccupiedCoordinate(double x, double y) {
+        int gridX = (int) (x / gridCellSize);
+        int gridY = (int) (y / gridCellSize);
+
+        // Mark the occupied space for the fish's dimensions
+        for (int i = gridX; i < gridX + Fish_Width / gridCellSize; i++) {
+            for (int j = gridY; j < gridY + Fish_height / gridCellSize; j++) {
+                occupiedCoordinates.remove(new Coordinate(i * gridCellSize, j * gridCellSize));
             }
         }
     }

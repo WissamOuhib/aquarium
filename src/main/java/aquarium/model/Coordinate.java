@@ -4,7 +4,9 @@ import javafx.scene.layout.Pane;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 public class Coordinate {
     @Getter @Setter
@@ -39,7 +41,7 @@ public class Coordinate {
         }
 
         double x, y;
-        do {
+        do { System.out.println("loooooooooooooooooooooooooooooooooooooooooop");
             x = (int) generateRandomX(aquariumPane);
             y = (int) generateRandomY(aquariumPane);
         } while (hasOverlap(x, y));
@@ -51,15 +53,11 @@ public class Coordinate {
 
     private static double generateRandomX(Pane aquariumPane) {
         double x =  Math.random() * (aquariumPane.getWidth() - Config.getFish_Width());
-        System.out.println("11111111111111111111111 "+aquariumPane.getWidth()+"   "+x);
-
         return (int)x;
     }
 
     private static double generateRandomY(Pane aquariumPane) {
         double y = Math.random() * (aquariumPane.getHeight() - Config.getFish_height());
-        System.out.println("22222222222222222222222 "+aquariumPane.getHeight()+"   "+y);
-
         return (int)y;
     }
 
@@ -79,6 +77,39 @@ public class Coordinate {
         }
 
         return false; // No overlapping
+    }
+
+    public static Set<Coordinate> calculateOccupiedSpace(double x, double y) {
+        Set<Coordinate> occupiedCoordinates = new HashSet<>();
+        int gridX = (int) (x / Config.getGridCellSize());
+        int gridY = (int) (y / Config.getGridCellSize());
+
+        for (int i = gridX; i < gridX + Config.getFish_Width() / Config.getGridCellSize(); i++) {
+            for (int j = gridY; j < gridY + Config.getFish_height() / Config.getGridCellSize(); j++) {
+                occupiedCoordinates.add(new Coordinate(i * Config.getGridCellSize(), j * Config.getGridCellSize()));
+            }
+        }
+
+        return occupiedCoordinates;
+    }
+
+    public static void updateOccupiedSpace(double oldX, double oldY, double newX, double newY) {
+        // Calculate old occupied coordinates
+        Set<Coordinate> oldOccupiedCoordinates = Coordinate.calculateOccupiedSpace(oldX, oldY);
+        // Calculate new occupied coordinates
+        Set<Coordinate> newOccupiedCoordinates = Coordinate.calculateOccupiedSpace(newX, newY);
+
+        // Calculate the coordinates that need to be added and removed
+        Set<Coordinate> coordinatesToRemove = new HashSet<>(oldOccupiedCoordinates);
+        coordinatesToRemove.removeAll(newOccupiedCoordinates);
+        Set<Coordinate> coordinatesToAdd = new HashSet<>(newOccupiedCoordinates);
+        coordinatesToAdd.removeAll(oldOccupiedCoordinates);
+
+        // Remove old occupied coordinates
+        Config.getOccupiedCoordinates().removeAll(coordinatesToRemove);
+
+        // Add new occupied coordinates
+        Config.getOccupiedCoordinates().addAll(coordinatesToAdd);
     }
 
 }
