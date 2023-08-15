@@ -88,4 +88,8 @@ public class Config implements AquariumPaneObserver { //la config est singleton 
         spawnedFishCount++;
     }
 
+    public static void decrementSpawnedFishCount() {
+        spawnedFishCount--;
+    }
+
 }

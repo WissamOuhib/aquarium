@@ -41,7 +41,7 @@ public class Coordinate {
         }
 
         double x, y;
-        do { System.out.println("loooooooooooooooooooooooooooooooooooooooooop");
+        do { //System.out.println("loooooooooooooooooooooooooooooooooooooooooop");
             x = (int) generateRandomX(aquariumPane);
             y = (int) generateRandomY(aquariumPane);
         } while (hasOverlap(x, y));

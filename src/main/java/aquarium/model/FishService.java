@@ -38,5 +38,11 @@ public class FishService { //les services
         return null;
     }
 
+    public void removeFish(Fish fish) {
+        fishList.remove(fish);
+        Config.freeOccupiedCoordinate(fish.getX(), fish.getY());
+        Config.decrementSpawnedFishCount();
+    }
+
 
 }

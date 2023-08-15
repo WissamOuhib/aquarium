@@ -64,13 +64,21 @@ public class AquariumController {
             aquariumPane.getChildren().add(fishNode);
         }
     }
-    public void handleAddFish(){
 
-      //  System.out.println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxx "+aquariumPane.getWidth());
-      //  System.out.println("yyyyyyyyyyyyyyyyyyyyyyyyyyyyy "+fishService.getAquariumPane().getWidth());
+    @FXML
+    private void handleAddFish(){
         Fish newFish = fishService.addFishWithRandomPosition();
         if(newFish!=null) {
             aquariumPane.getChildren().add(newFish.getImageView());
+        }
+    }
+    @FXML
+    private void handleRemoveFish() {
+        List<Fish> fishList = FishService.getFishList();
+        if (!fishList.isEmpty()) {
+            Fish fishToRemove = fishList.get(fishList.size() - 1); // Remove the last added fish
+            aquariumPane.getChildren().remove(fishToRemove.getImageView());
+            fishService.removeFish(fishToRemove);
         }
     }
 
