@@ -1,7 +1,8 @@
-module com.aquarium.aquarium {
+module aquarium {
     requires javafx.controls;
     requires javafx.fxml;
     requires lombok;
+    requires javafx.media;
 
 
     opens aquarium to javafx.fxml;

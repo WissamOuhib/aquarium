@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.IntStream;
 
 
 public class Config implements AquariumPaneObserver { //la config est singleton et observe les changements de la fenetre de l'aquarium
@@ -61,23 +62,19 @@ public class Config implements AquariumPaneObserver { //la config est singleton 
         int gridY = (int) (y / gridCellSize);
 
         // Mark the occupied space for the fish's dimensions
-        for (int i = gridX; i < gridX + Fish_Width / gridCellSize; i++) {
-            for (int j = gridY; j < gridY + Fish_height / gridCellSize; j++) {
-                occupiedCoordinates.add(new Coordinate(i * gridCellSize, j * gridCellSize));
-            }
-        }
+        IntStream.range(gridX, gridX + Fish_Width / gridCellSize)
+                .forEach(i -> IntStream.range(gridY, gridY + Fish_height / gridCellSize)
+                        .forEach(j -> occupiedCoordinates.add(new Coordinate(i * gridCellSize, j * gridCellSize))));
     }
 
     public static void freeOccupiedCoordinate(double x, double y) {
         int gridX = (int) (x / gridCellSize);
         int gridY = (int) (y / gridCellSize);
 
-        // Mark the occupied space for the fish's dimensions
-        for (int i = gridX; i < gridX + Fish_Width / gridCellSize; i++) {
-            for (int j = gridY; j < gridY + Fish_height / gridCellSize; j++) {
-                occupiedCoordinates.remove(new Coordinate(i * gridCellSize, j * gridCellSize));
-            }
-        }
+        // Free the occupied space for the fish's dimensions
+        IntStream.range(gridX, gridX + Fish_Width / gridCellSize)
+                .forEach(i -> IntStream.range(gridY, gridY + Fish_height / gridCellSize)
+                        .forEach(j -> occupiedCoordinates.remove(new Coordinate(i * gridCellSize, j * gridCellSize))));
     }
 
         public static boolean canSpawnMoreFish() {

@@ -21,7 +21,7 @@ public class AquariumApplication extends Application {
         stage.show();
 
         AquariumController controller = fxmlLoader.getController();
-        controller.init();
+       // controller.init();
     }
 
     public static void main(String[] args) {

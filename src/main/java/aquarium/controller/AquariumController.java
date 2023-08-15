@@ -6,16 +6,23 @@ import aquarium.model.Fish;
 import aquarium.model.FishService;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+
+import java.io.File;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
+
 import javafx.animation.FadeTransition;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
-
-public class AquariumController {
+public class AquariumController implements Initializable {
 //    @FXML
 //    private Label welcomeText;
 //
@@ -34,7 +41,8 @@ public class AquariumController {
     private static List<AquariumPaneObserver> AquariumPaneObservers;
     private AnimationTimer animationTimer;
 
-    public void init() {
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         fishService = FishService.getInstance(aquariumPane);
         AquariumPaneObservers = new ArrayList<>();
         addObserver(Config.getInstance()); //la config observe les changement des dimensions du pane
@@ -56,6 +64,10 @@ public class AquariumController {
         };
 
         startAnimation();
+        playAmbientSound();
+    }
+    public void init() {
+
     }
 
     private void updateFishPositions() {
@@ -123,4 +135,19 @@ public class AquariumController {
         // Play the animation
         fadeOut.play();
     }
+
+    private void playAmbientSound() {
+        // Create a Media object with the path to your audio file
+        String audioPath = AquariumController.class.getResource("/assets/fish-tank-ambiance.mp3").toExternalForm();
+        Media media = new Media(audioPath);
+
+        // Create a MediaPlayer
+        MediaPlayer mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setVolume(1); // Adjust the volume if needed
+        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE); // Play the music indefinitely
+
+        // Play the music
+        mediaPlayer.play();
+    }
+
 }
