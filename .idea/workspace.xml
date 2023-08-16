@@ -5,18 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d084065f-6737-4219-8686-66ddc75290fd" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/aquarium/AquariumApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aquarium/AquariumApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/aquarium/controller/AquariumController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aquarium/controller/AquariumController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/aquarium/model/AquariumPaneObserver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aquarium/model/AquariumPaneObserver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/aquarium/model/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aquarium/model/Config.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/aquarium/model/Coordinate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aquarium/model/Coordinate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/aquarium/model/Fish.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aquarium/model/Fish.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/aquarium/model/FishFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aquarium/model/FishFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/aquarium/sound/SoundManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aquarium/sound/SoundManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/aquarium/view/aquarium-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/aquarium/view/aquarium-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
