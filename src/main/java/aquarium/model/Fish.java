@@ -38,7 +38,8 @@ public class Fish {
         boolean changeXDirection = (speedX >0); //revert image if fish goes to the right
 
         // Update coordinates
-        Coordinate.updateOccupiedSpace(x,y, newX, newY);
+        //instead of calling this here, i get a snapshot of coordinates when i spawn fish that i call in generateRandomCoordinates
+       // Coordinate.updateOccupiedSpace(x,y, newX, newY);
 
         // Check for collisions with other fish
         if (collidesWithOtherFish(newX, newY)) {

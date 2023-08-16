@@ -49,6 +49,10 @@ public class Coordinate {
 
             do {
                 System.out.println("******** spawn attemps:    "+attempts);
+
+                //get a snapshot of current occupied coordinates
+                Coordinate.updateOccupiedSpaceByAllFish();
+
                 if (attempts >= maxAttempts) {
                     return new Coordinate(0, 0);
                 }
@@ -139,6 +143,17 @@ public class Coordinate {
         // Remove old occupied coordinates and add new occupied ones
         Config.getOccupiedCoordinates().removeAll(coordinatesToRemove);
         Config.getOccupiedCoordinates().addAll(coordinatesToAdd);
+    }
+
+    public static void updateOccupiedSpaceByAllFish() {
+        Set<Coordinate> occupiedCoordinates = new HashSet<>();
+
+        FishService.getFishList().forEach(fish -> {
+            Set<Coordinate> fishOccupiedCoordinates = calculateOccupiedSpace(fish.getX(), fish.getY());
+            occupiedCoordinates.addAll(fishOccupiedCoordinates);
+        });
+
+        Config.setOccupiedCoordinates(occupiedCoordinates);
     }
 
 }
