@@ -10,9 +10,9 @@ public class Config implements AquariumPaneObserver { //la config est singleton 
     @Getter
     private static final int gridCellSize = 10; //définit le seuil de proximité pour la detection de collision
     @Getter
-    private static final int Fish_Width = 100;
+    private static final int Fish_Width = 120;
     @Getter
-    private static final int Fish_height = 100;
+    private static final int Fish_height = 120;
     @Getter @Setter
     private static double Scene_Width = 1200;
     @Getter @Setter
