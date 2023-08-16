@@ -2,11 +2,9 @@ package aquarium.model;
 
 import lombok.Getter;
 import lombok.Setter;
-
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.IntStream;
-
 
 public class Config implements AquariumPaneObserver { //la config est singleton et observe les changements de la fenetre de l'aquarium
     @Getter
@@ -15,8 +13,6 @@ public class Config implements AquariumPaneObserver { //la config est singleton 
     private static final int Fish_Width = 100;
     @Getter
     private static final int Fish_height = 100;
-   // @Getter
-   // private static int gridCellSize = 100;
     @Getter @Setter
     private static double Scene_Width = 1200;
     @Getter @Setter
@@ -53,10 +49,6 @@ public class Config implements AquariumPaneObserver { //la config est singleton 
         updateAquariumDimensions(width, height);
     }
 
-    public static boolean isCoordinateOccupied(double x, double y) {
-        return occupiedCoordinates.contains(new Coordinate(x, y));
-    }
-
     public static void addOccupiedCoordinate(double x, double y) {
         int gridX = (int) (x / gridCellSize);
         int gridY = (int) (y / gridCellSize);
@@ -77,7 +69,7 @@ public class Config implements AquariumPaneObserver { //la config est singleton 
                         .forEach(j -> occupiedCoordinates.remove(new Coordinate(i * gridCellSize, j * gridCellSize))));
     }
 
-        public static boolean canSpawnMoreFish() {
+    public static boolean canSpawnMoreFish() {
         return spawnedFishCount < maxFishCount;
     }
 

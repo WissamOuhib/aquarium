@@ -35,12 +35,11 @@ public class Fish {
         speedY = Math.random() * 4 - 2;
     }
 
-
     public void move() {
         // Calculate new position
         double newX = x + speedX;
         double newY = y + speedY;
-        boolean changeXDirection = (speedX >0); //s'il va à droite au départ, j'inverse l'image
+        boolean changeXDirection = (speedX >0); //revert image if fish goes to the right
 
         // Update coordinates
         Coordinate.updateOccupiedSpace(x,y, newX, newY);
@@ -90,61 +89,17 @@ public class Fish {
     private boolean collidesWithOtherFish(double newX, double newY) {
         Set<Coordinate> myOccupiedCoordinates = Coordinate.calculateOccupiedSpace(this.x, this.y);
 
-        for (Fish otherFish : FishService.getFishList()) {
-            if (otherFish != this) { // Skip checking against itself
-                Set<Coordinate> otherFishOccupiedCoordinates = Coordinate.calculateOccupiedSpace(otherFish.x, otherFish.y);
-
-                // Check for overlap between occupied spaces
-                if (checkOverlap(myOccupiedCoordinates, otherFishOccupiedCoordinates)) {
-                    return true; // Collision detected with another fish
-                }
-            }
-        }
-        return false; // No collision detected with other fish
+        return FishService.getFishList().stream()
+                .filter(otherFish -> otherFish != this) // Skip checking against itself
+                .anyMatch(otherFish -> {
+                    Set<Coordinate> otherFishOccupiedCoordinates = Coordinate.calculateOccupiedSpace(otherFish.x, otherFish.y);
+                    return checkOverlap(myOccupiedCoordinates, otherFishOccupiedCoordinates);
+                });
     }
-
 
     private boolean checkOverlap(Set<Coordinate> coordinates1, Set<Coordinate> coordinates2) {
-        for (Coordinate coord1 : coordinates1) {
-            if (coordinates2.contains(coord1)) {
-                return true; // Overlapping detected
-            }
-        }
-        return false; // No overlapping detected
+        return coordinates1.stream()
+                .anyMatch(coordinates2::contains);
     }
 
-
-//    private boolean collidesWithOtherFish(double newX, double newY) {
-//        // Check if the new position collides with any other fish's position
-//        for (Coordinate occupiedCoordinate : Config.getOccupiedCoordinates()) {
-//            if (occupiedCoordinate.getX() == newX && occupiedCoordinate.getY() == newY) {
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-
-//    public void move() {
-//        // Calculate the new position
-//        int newX = (int)x+100;
-//        int newY = (int)y+100;
-//
-//        // Clear the fish's previous occupied space
-//        clearOccupiedSpace((int)x,(int)y);
-//
-//        // Mark the new occupied space
-//        markOccupiedSpace(newX, newY);
-//
-//        // Update the fish's position and other properties
-//    }
-//
-//    private void markOccupiedSpace(int x, int y) {
-//        Config.markOccupied(x, y);
-//        this.x = x;
-//        this.y = y;
-//    }
-//
-//    private void clearOccupiedSpace(int x, int y) {
-//        Config.markVacant(x, y);
-//    }
 }

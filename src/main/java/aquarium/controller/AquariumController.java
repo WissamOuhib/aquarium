@@ -101,9 +101,8 @@ public class AquariumController implements Initializable {
     }
 
     private void notifyObservers() {
-        for (AquariumPaneObserver observer : AquariumPaneObservers) {
-            observer.onConfigChanged(aquariumPane.getWidth(), aquariumPane.getHeight());
-        }
+        AquariumPaneObservers.stream()
+                .forEach(observer -> observer.onConfigChanged(aquariumPane.getWidth(), aquariumPane.getHeight()));
     }
 
     private void startAnimation() {
@@ -112,7 +111,6 @@ public class AquariumController implements Initializable {
 
     private void displayMessageAnimation() {
         maxFishMessage.setVisible(true); // Show the message
-
         //sound
         soundManager.playMaxFishReachedSound();
 

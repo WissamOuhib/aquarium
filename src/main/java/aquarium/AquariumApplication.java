@@ -18,9 +18,6 @@ public class AquariumApplication extends Application {
         stage.setTitle("Aquarium Game");
         stage.setScene(scene);
         stage.show();
-
-        //AquariumController controller = fxmlLoader.getController();
-       // controller.init();
     }
 
     public static void main(String[] args) {

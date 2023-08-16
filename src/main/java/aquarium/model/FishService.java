@@ -11,9 +11,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class FishService { //les services
+public class FishService { //A fish service
     @Getter
-    private Pane aquariumPane; // le conteneur de l'aquarium
+    private Pane aquariumPane; // aquarium container -not the whole window-
     @Getter
     private static List<Fish> fishList = new ArrayList<>();
     private static FishService FishService_instance;
@@ -34,7 +34,6 @@ public class FishService { //les services
         double randomY = position.getY();
 
         if(randomX!=0 && randomY!=0) {
-          //  ImageView fishImageView = FishFactory.createFishImageView();
             Fish newFish = FishFactory.createFish(randomX, randomY);
             newFish.initializeFish();
             Config.addOccupiedCoordinate(randomX, randomY);
@@ -51,6 +50,5 @@ public class FishService { //les services
         Config.freeOccupiedCoordinate(fish.getX(), fish.getY());
         Config.decrementSpawnedFishCount();
     }
-
 
 }

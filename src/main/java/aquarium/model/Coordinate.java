@@ -7,6 +7,8 @@ import lombok.Setter;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Coordinate {
     @Getter @Setter
@@ -20,7 +22,7 @@ public class Coordinate {
     }
 
     // Override hashCode and equals methods
-    // This allows using Coordinate objects as keys in collections like Set
+    // Coordinates will be saved in Sets and will be hashed for better performance
     @Override
     public int hashCode() {
         return Objects.hash(x, y);
@@ -47,8 +49,6 @@ public class Coordinate {
         } while (hasOverlap(x, y));
 
         return new Coordinate(x,y);
-
-        // Set the fish's position and other properties
     }
 
     private static double generateRandomX(Pane aquariumPane) {
@@ -65,50 +65,48 @@ public class Coordinate {
         double fishWidth = Config.getFish_Width();
         double fishHeight = Config.getFish_height();
 
-        // Check for overlap with occupied coordinates
-        for (Coordinate occupiedCoordinate : Config.getOccupiedCoordinates()) {
-            double occupiedX = occupiedCoordinate.getX();
-            double occupiedY = occupiedCoordinate.getY();
+        boolean isOverlapping = Config.getOccupiedCoordinates().stream()
+                .anyMatch(occupiedCoordinate -> {
+                    double occupiedX = occupiedCoordinate.getX();
+                    double occupiedY = occupiedCoordinate.getY();
+                    return x + fishWidth > occupiedX && x < occupiedX + fishWidth &&
+                            y + fishHeight > occupiedY && y < occupiedY + fishHeight;
+                });
 
-            if (x + fishWidth > occupiedX && x < occupiedX + fishWidth &&
-                    y + fishHeight > occupiedY && y < occupiedY + fishHeight) {
-                return true; // Overlapping
-            }
+        if (isOverlapping) {
+            return true; // Overlapping
         }
-
         return false; // No overlapping
     }
 
     public static Set<Coordinate> calculateOccupiedSpace(double x, double y) {
-        Set<Coordinate> occupiedCoordinates = new HashSet<>();
         int gridX = (int) (x / Config.getGridCellSize());
         int gridY = (int) (y / Config.getGridCellSize());
 
-        for (int i = gridX; i < gridX + Config.getFish_Width() / Config.getGridCellSize(); i++) {
-            for (int j = gridY; j < gridY + Config.getFish_height() / Config.getGridCellSize(); j++) {
-                occupiedCoordinates.add(new Coordinate(i * Config.getGridCellSize(), j * Config.getGridCellSize()));
-            }
-        }
-
-        return occupiedCoordinates;
+        return IntStream.range(gridX, gridX + Config.getFish_Width() / Config.getGridCellSize())
+                .boxed()
+                .flatMap(i ->
+                        IntStream.range(gridY, gridY + Config.getFish_height() / Config.getGridCellSize())
+                                .mapToObj(j -> new Coordinate(i * Config.getGridCellSize(), j * Config.getGridCellSize())))
+                .collect(Collectors.toSet());
     }
 
     public static void updateOccupiedSpace(double oldX, double oldY, double newX, double newY) {
-        // Calculate old occupied coordinates
+        // Calculate old and new occupied coordinates
         Set<Coordinate> oldOccupiedCoordinates = Coordinate.calculateOccupiedSpace(oldX, oldY);
-        // Calculate new occupied coordinates
         Set<Coordinate> newOccupiedCoordinates = Coordinate.calculateOccupiedSpace(newX, newY);
 
         // Calculate the coordinates that need to be added and removed
-        Set<Coordinate> coordinatesToRemove = new HashSet<>(oldOccupiedCoordinates);
-        coordinatesToRemove.removeAll(newOccupiedCoordinates);
-        Set<Coordinate> coordinatesToAdd = new HashSet<>(newOccupiedCoordinates);
-        coordinatesToAdd.removeAll(oldOccupiedCoordinates);
+        Set<Coordinate> coordinatesToRemove = oldOccupiedCoordinates.stream()
+                .filter(coordinate -> !newOccupiedCoordinates.contains(coordinate))
+                .collect(Collectors.toSet());
 
-        // Remove old occupied coordinates
+        Set<Coordinate> coordinatesToAdd = newOccupiedCoordinates.stream()
+                .filter(coordinate -> !oldOccupiedCoordinates.contains(coordinate))
+                .collect(Collectors.toSet());
+
+        // Remove old occupied coordinates and add new occupied ones
         Config.getOccupiedCoordinates().removeAll(coordinatesToRemove);
-
-        // Add new occupied coordinates
         Config.getOccupiedCoordinates().addAll(coordinatesToAdd);
     }
 
