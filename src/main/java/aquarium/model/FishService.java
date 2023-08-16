@@ -1,20 +1,16 @@
 package aquarium.model;
 
-import javafx.animation.AnimationTimer;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class FishService { //A fish service
-    @Getter
+    @Getter @Setter
     private Pane aquariumPane; // aquarium container -not the whole window-
-    @Getter
+    @Getter @Setter
     private static List<Fish> fishList = new ArrayList<>();
     private static FishService FishService_instance;
 

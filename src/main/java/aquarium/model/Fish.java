@@ -14,9 +14,9 @@ public class Fish {
     private double x;
     @Getter @Setter
     private double y;
-    @Getter
+    @Getter @Setter
     private double speedX;
-    @Getter
+    @Getter @Setter
     private double speedY;
     @Getter
     private ImageView imageView;

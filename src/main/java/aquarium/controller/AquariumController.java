@@ -15,15 +15,21 @@ import java.util.ResourceBundle;
 
 import javafx.animation.FadeTransition;
 import javafx.util.Duration;
+import lombok.Getter;
+import lombok.Setter;
 
 public class AquariumController implements Initializable {
 
-    @FXML
+    @FXML @Getter @Setter
     private Pane aquariumPane;
     @FXML
     private Label maxFishMessage;
+    @Getter @Setter
     private FishService fishService;
+    @Getter @Setter
     private SoundManager soundManager;
+    @Getter @Setter
+    private Config config;
 
     //observateurs du changement des dimensions du aquariumPane
     private static List<AquariumPaneObserver> AquariumPaneObservers;
@@ -33,6 +39,7 @@ public class AquariumController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         fishService = FishService.getInstance(aquariumPane);
         soundManager = SoundManager.get_instance();
+        config = Config.getInstance();
 
         AquariumPaneObservers = new ArrayList<>();
         addObserver(Config.getInstance()); //la config observe les changement des dimensions du pane
@@ -40,10 +47,10 @@ public class AquariumController implements Initializable {
 
         //changement des dimensions
         aquariumPane.widthProperty().addListener((observable, oldValue, newValue) -> {
-            Config.getInstance().updateAquariumDimensions(newValue.doubleValue(), aquariumPane.getHeight());
+            Config.updateAquariumDimensions(newValue.doubleValue(), aquariumPane.getHeight());
         });
         aquariumPane.heightProperty().addListener((observable, oldValue, newValue) -> {
-            Config.getInstance().updateAquariumDimensions(aquariumPane.getWidth(), newValue.doubleValue());
+            Config.updateAquariumDimensions(aquariumPane.getWidth(), newValue.doubleValue());
         });
 
         animationTimer = new AnimationTimer() {
@@ -57,11 +64,10 @@ public class AquariumController implements Initializable {
         soundManager.playAmbientSound();
     }
 
-    private void updateFishPositions() {
+    public void updateFishPositions() {
         aquariumPane.getChildren().clear(); // Clear the pane
         for (Fish fish : fishService.getFishList()) {
             fish.move();
-         //   System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!  "+fish.getX());
             Node fishNode = fish.getImageView();
             fishNode.setLayoutX(fish.getX());
             fishNode.setLayoutY(fish.getY());
@@ -70,7 +76,7 @@ public class AquariumController implements Initializable {
     }
 
     @FXML
-    private void handleAddFish(){
+    public void handleAddFish(){
         if (FishService.getFishList().size() < Config.getMaxFishCount()) {
             Fish newFish = fishService.addFishWithRandomPosition();
             if (newFish != null) {
@@ -82,7 +88,7 @@ public class AquariumController implements Initializable {
         }
     }
     @FXML
-    private void handleRemoveFish() {
+    public void handleRemoveFish() {
         List<Fish> fishList = FishService.getFishList();
         if (!fishList.isEmpty()) {
             Fish fishToRemove = fishList.get(fishList.size() - 1); // Remove the last added fish
@@ -100,7 +106,7 @@ public class AquariumController implements Initializable {
         AquariumPaneObservers.remove(observer);
     }
 
-    private void notifyObservers() {
+    public void notifyObservers() {
         AquariumPaneObservers.stream()
                 .forEach(observer -> observer.onConfigChanged(aquariumPane.getWidth(), aquariumPane.getHeight()));
     }

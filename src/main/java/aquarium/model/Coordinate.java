@@ -3,8 +3,6 @@ package aquarium.model;
 import javafx.scene.layout.Pane;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -43,7 +41,8 @@ public class Coordinate {
         }
 
         double x, y;
-        do { //System.out.println("loooooooooooooooooooooooooooooooooooooooooop");
+        do {
+            System.out.println("loooooooooooooooooooooooooooooooooooooooooop");
             x = (int) generateRandomX(aquariumPane);
             y = (int) generateRandomY(aquariumPane);
         } while (hasOverlap(x, y));
