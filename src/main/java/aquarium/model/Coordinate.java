@@ -40,14 +40,21 @@ public class Coordinate {
             return new Coordinate(0,0);
         }
 
+        int maxAttempts = 1000; // Maximum attempts to find valid coordinates, so i don't loop forever
+        int attempts = 0;
         double x, y;
+
         do {
-            System.out.println("loooooooooooooooooooooooooooooooooooooooooop");
+            System.out.println("******** spawn attemps:    "+attempts);
+            if (attempts >= maxAttempts) {
+                return new Coordinate(0, 0);
+            }
             x = (int) generateRandomX(aquariumPane);
             y = (int) generateRandomY(aquariumPane);
+            attempts++;
         } while (hasOverlap(x, y));
 
-        return new Coordinate(x,y);
+        return new Coordinate(x, y);
     }
 
     private static double generateRandomX(Pane aquariumPane) {

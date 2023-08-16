@@ -5,18 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d084065f-6737-4219-8686-66ddc75290fd" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/model/ConfigTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/model/CoordinateTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/model/FishServiceTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/model/FishTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/aquarium/controller/AquariumController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aquarium/controller/AquariumController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/aquarium/model/AquariumPaneObserver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aquarium/model/AquariumPaneObserver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/aquarium/model/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aquarium/model/Config.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/aquarium/model/Coordinate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aquarium/model/Coordinate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/aquarium/model/Fish.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aquarium/model/Fish.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/aquarium/model/FishService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aquarium/model/FishService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,6 +99,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="CoordinateTest.testGenerateRandomCoordinates" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="aquarium" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="model" />
+      <option name="MAIN_CLASS_NAME" value="model.CoordinateTest" />
+      <option name="METHOD_NAME" value="testGenerateRandomCoordinates" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="FishServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="aquarium" />
       <extension name="coverage">
@@ -121,22 +127,6 @@
       <option name="MAIN_CLASS_NAME" value="model.FishServiceTest" />
       <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="FishServiceTest.testRemoveFish" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="aquarium" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="model.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="model" />
-      <option name="MAIN_CLASS_NAME" value="model.FishServiceTest" />
-      <option name="METHOD_NAME" value="testRemoveFish" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -159,19 +149,19 @@
     </configuration>
     <list>
       <item itemvalue="Application.Aquarium" />
+      <item itemvalue="JUnit.CoordinateTest.testGenerateRandomCoordinates" />
       <item itemvalue="JUnit.ConfigTest" />
       <item itemvalue="JUnit.CoordinateTest" />
       <item itemvalue="JUnit.FishServiceTest" />
-      <item itemvalue="JUnit.FishServiceTest.testRemoveFish" />
       <item itemvalue="JUnit.FishTest" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.CoordinateTest.testGenerateRandomCoordinates" />
         <item itemvalue="JUnit.FishTest" />
         <item itemvalue="JUnit.CoordinateTest" />
         <item itemvalue="JUnit.ConfigTest" />
         <item itemvalue="JUnit.FishServiceTest" />
-        <item itemvalue="JUnit.FishServiceTest.testRemoveFish" />
       </list>
     </recent_temporary>
   </component>
