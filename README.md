@@ -3,8 +3,11 @@ java aquarium game
 
 # technos
 java JDK 11.0.12.7-hotspot
+
 javaFX SDK 20.0.2
+
 apache maven 3.9.4
+
 ItelliJ IDEA 2023.2
 
 # architecture
