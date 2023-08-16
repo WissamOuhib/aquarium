@@ -1,6 +1,7 @@
 package aquarium;
 
 import aquarium.model.Config;
+import aquarium.model.Coordinate;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

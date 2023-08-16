@@ -6,16 +6,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.text.Font?>
-
-<!--<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"-->
-<!--      fx:controller="aquarium.controller.AquariumController">-->
-<!--    <padding>-->
-<!--        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>-->
-<!--    </padding>-->
-<!--    <Label fx:id="welcomeText"/>-->
-<!--    <Button text="Hello!" onAction="#onHelloButtonClick"/>-->
-<!--</VBox>-->
 
 <BorderPane stylesheets="@../../assets/style.css"
             xmlns="http://javafx.com/javafx/20.0.1"
@@ -25,7 +15,6 @@
 <center>
     <StackPane>
         <Pane fx:id="aquariumPane" styleClass="aquarium">
-            <!-- Aquarium content (fish, etc.) goes here -->
         </Pane>
         <Label fx:id="maxFishMessage" styleClass="message" text="Oops plus de place !" visible="false" />
     </StackPane>

@@ -6,7 +6,17 @@
   <component name="ChangeListManager">
     <list default="true" id="d084065f-6737-4219-8686-66ddc75290fd" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/aquarium/AquariumApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aquarium/AquariumApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/aquarium/controller/AquariumController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aquarium/controller/AquariumController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/aquarium/model/AquariumPaneObserver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aquarium/model/AquariumPaneObserver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/aquarium/model/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aquarium/model/Config.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/aquarium/model/Coordinate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aquarium/model/Coordinate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/aquarium/model/Fish.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aquarium/model/Fish.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/aquarium/model/FishFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aquarium/model/FishFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/aquarium/sound/SoundManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/aquarium/sound/SoundManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/aquarium/view/aquarium-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/aquarium/view/aquarium-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,22 +125,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="FishServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="aquarium" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="model.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="model" />
-      <option name="MAIN_CLASS_NAME" value="model.FishServiceTest" />
-      <option name="METHOD_NAME" value="" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="FishTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="aquarium" />
       <extension name="coverage">
@@ -147,21 +141,37 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="FishTest.testMove" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="aquarium" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="model" />
+      <option name="MAIN_CLASS_NAME" value="model.FishTest" />
+      <option name="METHOD_NAME" value="testMove" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
       <item itemvalue="Application.Aquarium" />
       <item itemvalue="JUnit.CoordinateTest.testGenerateRandomCoordinates" />
+      <item itemvalue="JUnit.FishTest.testMove" />
       <item itemvalue="JUnit.ConfigTest" />
       <item itemvalue="JUnit.CoordinateTest" />
-      <item itemvalue="JUnit.FishServiceTest" />
       <item itemvalue="JUnit.FishTest" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.CoordinateTest.testGenerateRandomCoordinates" />
         <item itemvalue="JUnit.FishTest" />
+        <item itemvalue="JUnit.FishTest.testMove" />
+        <item itemvalue="JUnit.CoordinateTest.testGenerateRandomCoordinates" />
         <item itemvalue="JUnit.CoordinateTest" />
         <item itemvalue="JUnit.ConfigTest" />
-        <item itemvalue="JUnit.FishServiceTest" />
       </list>
     </recent_temporary>
   </component>

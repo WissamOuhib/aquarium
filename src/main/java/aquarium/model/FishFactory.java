@@ -22,14 +22,17 @@ public class FishFactory {
     }
     public static ImageView createFishImageView() {
         String randomImagePath = imagePaths.get(new Random().nextInt(imagePaths.size()));
-        Image fishImage = new Image(FishFactory.class.getResourceAsStream(randomImagePath));
-
         ImageView fishImageView = new ImageView();
-        fishImageView.setImage(fishImage);
-        fishImageView.setPreserveRatio(true);
-        fishImageView.setFitWidth(Config.getFish_Width());
-        fishImageView.setFitHeight(Config.getFish_height());
-        fishImageView.setVisible(false);
+        try {
+            Image fishImage = new Image(FishFactory.class.getResourceAsStream(randomImagePath));
+            fishImageView.setImage(fishImage);
+            fishImageView.setPreserveRatio(true);
+            fishImageView.setFitWidth(Config.getFish_Width());
+            fishImageView.setFitHeight(Config.getFish_height());
+            fishImageView.setVisible(false);
+        } catch (NullPointerException e) {
+            System.out.println("L'image du poisson est introuvable");
+        }
         return fishImageView;
     }
 }

@@ -18,6 +18,10 @@ import javafx.util.Duration;
 import lombok.Getter;
 import lombok.Setter;
 
+/*The aquarium main controller (for the main view)
+* it implements Initializable interface so that initialize method will be called automatically
+* (instead of implementing an init method and call it manually)
+* */
 public class AquariumController implements Initializable {
 
     @FXML @Getter @Setter
@@ -31,37 +35,42 @@ public class AquariumController implements Initializable {
     @Getter @Setter
     private Config config;
 
-    //observateurs du changement des dimensions du aquariumPane
+    //observers for aquariumPane to handle window resize
     private static List<AquariumPaneObserver> AquariumPaneObservers;
     private AnimationTimer animationTimer;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        fishService = FishService.getInstance(aquariumPane);
-        soundManager = SoundManager.get_instance();
-        config = Config.getInstance();
+        try {
+            fishService = FishService.getInstance(aquariumPane);
+            soundManager = SoundManager.get_instance();
+            config = Config.getInstance();
 
-        AquariumPaneObservers = new ArrayList<>();
-        addObserver(Config.getInstance()); //la config observe les changement des dimensions du pane
-        notifyObservers(); //config recupère les dimensions du pane
+            AquariumPaneObservers = new ArrayList<>();
+            //Config class observes aquariumPane changes
+            addObserver(Config.getInstance());
+            //Config updates aquariumPane dimensions
+            notifyObservers();
 
-        //changement des dimensions
-        aquariumPane.widthProperty().addListener((observable, oldValue, newValue) -> {
-            Config.updateAquariumDimensions(newValue.doubleValue(), aquariumPane.getHeight());
-        });
-        aquariumPane.heightProperty().addListener((observable, oldValue, newValue) -> {
-            Config.updateAquariumDimensions(aquariumPane.getWidth(), newValue.doubleValue());
-        });
+            //handle aquarium dimensions changes
+            aquariumPane.widthProperty().addListener((observable, oldValue, newValue) -> {
+                Config.updateAquariumDimensions(newValue.doubleValue(), aquariumPane.getHeight());
+            });
+            aquariumPane.heightProperty().addListener((observable, oldValue, newValue) -> {
+                Config.updateAquariumDimensions(aquariumPane.getWidth(), newValue.doubleValue());
+            });
 
-        animationTimer = new AnimationTimer() {
-            @Override
-            public void handle(long now) {
-                updateFishPositions(); // Update fish nodes on the pane
-            }
-        };
+            animationTimer = new AnimationTimer() {
+                @Override
+                public void handle(long now) {
+                    updateFishPositions(); // Update fish nodes on the pane
+                }
+            };
 
-        startAnimation();
-        soundManager.playAmbientSound();
+            startAnimation();
+            soundManager.playAmbientSound();
+
+        } catch (Exception e) {e.printStackTrace();}
     }
 
     public void updateFishPositions() {
@@ -77,25 +86,29 @@ public class AquariumController implements Initializable {
 
     @FXML
     public void handleAddFish(){
-        if (FishService.getFishList().size() < Config.getMaxFishCount()) {
-            Fish newFish = fishService.addFishWithRandomPosition();
-            if (newFish != null) {
-                aquariumPane.getChildren().add(newFish.getImageView());
-                soundManager.playFishPopInSound();
+        try {
+            if (FishService.getFishList().size() < Config.getMaxFishCount()) {
+                Fish newFish = fishService.addFishWithRandomPosition();
+                if (newFish != null) {
+                    aquariumPane.getChildren().add(newFish.getImageView());
+                    soundManager.playFishPopInSound();
+                }
+            } else {
+                displayMessageAnimation(); // Max fish count reached message
             }
-        } else {
-            displayMessageAnimation(); // message plus de place
-        }
+        } catch (Exception e) {e.printStackTrace();}
     }
     @FXML
     public void handleRemoveFish() {
-        List<Fish> fishList = FishService.getFishList();
-        if (!fishList.isEmpty()) {
-            Fish fishToRemove = fishList.get(fishList.size() - 1); // Remove the last added fish
-            aquariumPane.getChildren().remove(fishToRemove.getImageView());
-            fishService.removeFish(fishToRemove);
-            soundManager.playFishPopOutSound();
-        }
+        try {
+            List<Fish> fishList = FishService.getFishList();
+            if (!fishList.isEmpty()) {
+                Fish fishToRemove = fishList.get(fishList.size() - 1); // Remove the last added fish
+                aquariumPane.getChildren().remove(fishToRemove.getImageView());
+                fishService.removeFish(fishToRemove);
+                soundManager.playFishPopOutSound();
+            }
+        } catch (Exception e) {e.printStackTrace();}
     }
 
     public static void addObserver(AquariumPaneObserver observer) {

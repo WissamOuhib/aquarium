@@ -1,12 +1,8 @@
 package aquarium.model;
 
-import javafx.scene.Node;
 import javafx.scene.image.ImageView;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.HashSet;
 import java.util.Set;
 
 public class Fish {
@@ -18,7 +14,7 @@ public class Fish {
     private double speedX;
     @Getter @Setter
     private double speedY;
-    @Getter
+    @Getter @Setter
     private ImageView imageView;
 
     public Fish(double x, double y, ImageView imageView) {
@@ -53,21 +49,21 @@ public class Fish {
         }
 
         // Check for collisions with aquarium borders
-        double fish_x_edge; //la limite physique du poisson
+        double fish_x_edge; //physical limit of the fish (considering fish image size)
         double fish_y_edge;
 
-        if(speedX > 0) fish_x_edge = newX + Config.getFish_Width();
-        else fish_x_edge = newX;
+        if(speedX > 0) fish_x_edge = newX + Config.getFish_Width(); //movement to the right
+        else fish_x_edge = newX; //movement to the left
 
-        if (newX < 0 || fish_x_edge > Config.getAquarium_Width()) {
+        if (newX < 0 || fish_x_edge > Config.getAquarium_Width()) { //hits aquarium horizontal border
             speedX *= -1; // Change horizontal direction
             changeXDirection = true;
         }
 
-        if(speedY > 0) fish_y_edge = newY + Config.getFish_height();
-        else fish_y_edge = newY;
+        if(speedY > 0) fish_y_edge = newY + Config.getFish_height(); //movement to bottom
+        else fish_y_edge = newY; //movement to top
 
-        if (newY < 0 || fish_y_edge > Config.getAquarium_height()) {
+        if (newY < 0 || fish_y_edge > Config.getAquarium_height()) { //hits aquarium vertical border
             speedY *= -1; // Change vertical direction
         }
 
@@ -83,7 +79,6 @@ public class Fish {
                 imageView.setScaleX(1); // Reset scaling
             }
         }
-
     }
 
     private boolean collidesWithOtherFish(double newX, double newY) {

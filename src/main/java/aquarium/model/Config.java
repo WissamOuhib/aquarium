@@ -6,9 +6,10 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.IntStream;
 
-public class Config implements AquariumPaneObserver { //la config est singleton et observe les changements de la fenetre de l'aquarium
+//Config is a singleton class. it observes aquariumPane changes
+public class Config implements AquariumPaneObserver {
     @Getter
-    private static final int gridCellSize = 10; //définit le seuil de proximité pour la detection de collision
+    private static final int gridCellSize = 10; // defines the proximity threshold for collision detection
     @Getter
     private static final int Fish_Width = 100;
     @Getter
@@ -22,7 +23,7 @@ public class Config implements AquariumPaneObserver { //la config est singleton 
     @Getter @Setter
     private static double aquarium_height;
     @Getter @Setter
-    private static int maxFishCount = 20; // nombre max de poissons
+    private static int maxFishCount = 20; // maximum number of fish to spawn
     @Getter @Setter
     private static int spawnedFishCount = 0;
     @Getter @Setter
